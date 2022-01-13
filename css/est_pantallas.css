@@ -1,0 +1,55 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	background-image: url(../imagenes/fondo1.jpg);
+	margin-top: 0px;
+	margin-bottom: 30px;
+	font-size: 11px;
+}
+
+.titulo{
+   font-family:"Trebuchet MS"; font-size:12px;
+   color:#FFFFFF;
+}
+.tabla_detalleMov{ 
+font-family: "Trebuchet MS";font-size: 12px;background:#ffffff;color:#333;hover:expression(this.onmouseover=new Function("this.style.background='#b1d2ea';this.style.color='#222222';"),this.onmouseout=new Function("this.style.background='#ffffff';this.style.color='#000';"));
+} 
+.tabla_detalleMov:hover{ 
+font-family: "Trebuchet MS";font-size: 12px;background:#b1d2ea;color:#222222;
+} 
+.tabla_detalle{ 
+font-family: "Trebuchet MS";font-size: 12px;background:#ffffff;color:#333;
+} 
+.tabla_cabecera{ 
+background: url(../imagenes/grid-blue-ln.gif) center;color:#2e6e9e; font-family: "Trebuchet MS";font-size: 12px;
+border-collapse:collapse; border-color:#a6c9e2; border-left-color:#a6c9e2; border-right-color:#a6c9e2; border-top-color:#a6c9e2; border-bottom-color:#a6c9e2;
+} 
+.texto_blanco{
+border-style: dotted; 
+border-width: 0px; 
+font-family:"Trebuchet MS";
+font-size: 12px; 
+color:#FFFFFF;
+}
+.tabla_logeo{ 
+background:url(../imagenes/grid-blue-pg.gif) center;
+color:#ffffff; font-family: "Trebuchet MS";font-size: 12px;
+border-collapse:collapse; border-color:#a6c9e2; border-left-color:#a6c9e2; border-right-color:#a6c9e2; border-top-color:#a6c9e2; border-bottom-color:#a6c9e2;
+}
+
+.lista td{background: url(../imagenes/grid-blue-pg.gif) center;color:#ffffff; font-family: "Trebuchet MS";font-size: 12px;}
+.activo td{background: url(../imagenes/grid-activo.gif) center;color:#5b9dd0; font-family: "Trebuchet MS";font-size: 12px;}
+
+.solo_bordes{border-collapse:separate;border-bottom:1px solid #056AB2;
+border-left:1px solid #056AB2;border-right:1px solid #a6c9e2;border-top:1px solid #a6c9e2; }
+
+.separador{ 
+color:#FFFFFF; font-family: "Trebuchet MS";font-size:5px; padding:0px;
+background:url(../imagenes/grid-blue-pg.gif) center; border-collapse:separate;
+border-bottom:1px solid #056AB2;border-left:1px solid #056AB2;border-right:1px solid #a6c9e2;border-top:1px solid #a6c9e2;
+} 
+.separador2{ 
+color:#FFFFFF; font-family: "Trebuchet MS";font-size:1px; padding:0px;margin:0px;
+background:url(../imagenes/grid-blue-pg.gif) center; border-collapse:separate;border-bottom:1px solid #056AB2;
+border-left:1px solid #056AB2;border-right:1px solid #a6c9e2;border-top:1px solid #a6c9e2;
+} 
