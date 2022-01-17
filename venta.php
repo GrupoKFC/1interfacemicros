@@ -50,13 +50,13 @@ if (strlen($mensj) > 1) {?>
 	</script>
        <?php
 } else {
-	/////////////////////////CONEXIÓN A MICROS//////////////////////
+	/////////////////////////CONEXIï¿½N A MICROS//////////////////////
 	$server = $lc_Odbc;
 	$user   = 'dba';
 	$pwd    = 'micros3700';
 	$db     = 'micros';
 	$lc_regs;
-	$dbh=@sybase_connect($server, $user, $pwd) or die('Cannot connect');
+	$dbh=odbc_connect($server, $user, $pwd) or die('Cannot connect');
 
 	///////////////////////// QUERYS //////////////////////
 	//VENTAS POR PRODUCTO 
@@ -1643,11 +1643,11 @@ SUM
             		AND CONVERT(CHAR(12), tdtl.business_date, 112) = '$fechaConsulta'
 		GROUP BY    tdtl.business_date, empdef.payroll_id,empdef.obj_num, empdef.chk_name  ";
 
-	/////////////////////////CONSULTAR INFORMACIÓN//////////////////////
+	/////////////////////////CONSULTAR INFORMACIï¿½N//////////////////////
 	//VENTAS POR PRODUCTO
-	$result = sybase_query($queryXProducto , $dbh, false) or die('error');
+	$result = odbc_exec($queryXProducto , $dbh, false) or die('error');
 	$i = 0;
-	while($row = sybase_fetch_object($result)) { 
+	while($row = odbc_fetch_object($result)) { 
 		$lc_regs ['XProducto'][$i]= array(
 		"FECHA"	=> $row -> BUSINESS_DATE,
 		"NUM_PLU"		=> $row -> PLU,
@@ -1670,13 +1670,13 @@ SUM
 		$i++;
 	}
 	$jsXProducto = (json_encode($lc_regs));
-	sybase_free_result ($result);
+	odbc_free_result ($result);
 	if ($jsXProducto != "null"){		
 		//VENTAS POR HORA
-		$result = sybase_query($queryXHora , $dbh, false) or die('error');
+		$result = odbc_exec($queryXHora , $dbh, false) or die('error');
 		$lc_regs = null;
 		$i = 0;
-		while($row = sybase_fetch_object($result)) { 
+		while($row = odbc_fetch_object($result)) { 
 			$lc_regs ['XHora'][$i]= array(
 			 "FECHA"	=> $row -> BUSINESS_DATE, 
 			 "TIEMPO"	=> $row -> PERIOD_HOUR,
@@ -1686,13 +1686,13 @@ SUM
 		}
 
 		$jsXHora = (json_encode($lc_regs));
-		sybase_free_result ($result);
+		odbc_free_result ($result);
 
 		//CIERRE DE CAJAS
-		$result = sybase_query($queryCC, $dbh, false) or die('error');
+		$result = odbc_exec($queryCC, $dbh, false) or die('error');
 		$lc_regs = null;
 		$i = 0;
-		while($row = sybase_fetch_object($result)) { 
+		while($row = odbc_fetch_object($result)) { 
 			$lc_regs ['CierreCajas'][]= array(
 			 "FECHA"		=> $row -> BUSINESS_DATE, 
 			 "IVA"			=> $row -> TAX_TTL, 
@@ -1712,13 +1712,13 @@ SUM
 		}
 
 		$jsCC = (json_encode($lc_regs));
-		sybase_free_result ($result);
+		odbc_free_result ($result);
 
 		//VENTA POR CAJERO
-		$result = sybase_query($queryXCajero, $dbh, false) or die('error');
+		$result = odbc_exec($queryXCajero, $dbh, false) or die('error');
 		$lc_regs = null;
 		$i = 0;
-		while($row = sybase_fetch_object($result)) { 
+		while($row = odbc_fetch_object($result)) { 
 			$lc_regs ['XCajero'][$i]= array(
 	 		 "FECHA"		=> $row -> BUSINESS_DATE, 
 			 "FORMA_PAGO"		=> $row -> TENDER_MEDIA, 
@@ -1728,13 +1728,13 @@ SUM
 			$i++;
 		}
 		$jsXCajero = (json_encode($lc_regs));
-		sybase_free_result ($result);
+		odbc_free_result ($result);
 
 		//VENTAS CREDITOS SC
-		$result = sybase_query($queryCredSC, $dbh, false) or die('error');
+		$result = odbc_exec($queryCredSC, $dbh, false) or die('error');
 		$lc_regs = null;
 		$i = 0;
-		while($row = sybase_fetch_object($result)) { 
+		while($row = odbc_fetch_object($result)) { 
 			$lc_regs ['XcreditoSC'][$i]= array(
 	 		 "FECHA"		=> $row -> BUSINESS_DATE, 
 			 "FORMA_PAGO"		=> $row -> TENDER_MEDIA, 
@@ -1744,13 +1744,13 @@ SUM
 			$i++;
 		}
 		$jsCreditoSC = (json_encode($lc_regs));
-		sybase_free_result ($result);
+		odbc_free_result ($result);
 
 		//TRANSACCIONES POR CAJERO
-		$result = sybase_query($queryTransXCajero, $dbh, false) or die('error');
+		$result = odbc_exec($queryTransXCajero, $dbh, false) or die('error');
 		$lc_regs = null;
 		$i = 0;
-		while($row = sybase_fetch_object($result)) { 
+		while($row = odbc_fetch_object($result)) { 
 			$lc_regs ['TransXCajero'][$i]= array(
 	 		 "FECHA"		=> $row -> BUSINESS_DATE, 
 			 "CAJERO"		=> $row -> EMPLOYEE_CHK_NAME, 
@@ -1758,13 +1758,13 @@ SUM
 			$i++;
 		}
 		$jsTransXCajero = (json_encode($lc_regs));
-		sybase_free_result ($result);
+		odbc_free_result ($result);
 
 		//TOTALES POR CAJERO
-		$result = sybase_query($queryTotalXCajero , $dbh, false) or die('error');
+		$result = odbc_exec($queryTotalXCajero , $dbh, false) or die('error');
 		$lc_regs = null;
 		$i = 0;
-		while($row = sybase_fetch_object($result)) { 
+		while($row = odbc_fetch_object($result)) { 
 			$lc_regs ['TotalXCajero'][$i]= array(
 	 		 "FECHA"		=> $row -> BUSINESS_DATE,  
 			 "VALOR"		=> $row -> TENDER_TOTAL,
@@ -1773,13 +1773,13 @@ SUM
 			$i++;
 		}
 		$jsTotalXCajero  = (json_encode($lc_regs));
-		sybase_free_result ($result);
+		odbc_free_result ($result);
 
 		//CAJEROS DELIVERY
-		$result = sybase_query($queryDelivery, $dbh, false) or die('error');
+		$result = odbc_exec($queryDelivery, $dbh, false) or die('error');
 		$lc_regs = null;
 		$i = 0;
-		while($row = sybase_fetch_object($result)) { 
+		while($row = odbc_fetch_object($result)) { 
 			$lc_regs ['DeliveryXCajero'][$i]= array(
 	 		 "FECHA"		=> $row -> BUSINESS_DATE,  
 			 "VALOR"		=> $row -> TENDER_TOTAL,
@@ -1788,13 +1788,13 @@ SUM
 			$i++;
 		}
 		$jsDeliveryXCajero  = (json_encode($lc_regs));
-		sybase_free_result ($result);
+		odbc_free_result ($result);
 
 		//CUPONES - GRUPON
-		$result = sybase_query($queryCupones, $dbh, false) or die('error');
+		$result = odbc_exec($queryCupones, $dbh, false) or die('error');
 		$lc_regs = null;
 		$i = 0;
-		while($row = sybase_fetch_object($result)) { 
+		while($row = odbc_fetch_object($result)) { 
 			$lc_regs ['Cupones'][$i]= array(
 	 		 "FECHA"		=> $row -> BUSINESS_DATE,  
 			 "PLU"			=> $row -> PLU,
@@ -1807,13 +1807,13 @@ SUM
 			$i++;
 		}
 		$jsCupones  = (json_encode($lc_regs));
-		sybase_free_result ($result);
+		odbc_free_result ($result);
 		
 		// VENTA Z
-		$result = sybase_query($queryVentaZ, $dbh, false) or die('error');
+		$result = odbc_exec($queryVentaZ, $dbh, false) or die('error');
 		$lc_regs = null;
 		$i = 0;
-		while($row = sybase_fetch_object($result)) { 
+		while($row = odbc_fetch_object($result)) { 
 			$lc_regs ['VentaZ'][$i]= array(
 	 		 "TOTAL_VENTA"	=> $row -> TOTAL_VENTA,  
 			 "TRANSACCIONES"	=> $row -> TRANS 
@@ -1821,13 +1821,13 @@ SUM
 			$i++;
 		}
 		$jsVentaZ  = (json_encode($lc_regs));
-		sybase_free_result ($result);
+		odbc_free_result ($result);
 		
 		// ANULACIONES
-		$result = sybase_query($queryAnulacion, $dbh, false) or die('error');
+		$result = odbc_exec($queryAnulacion, $dbh, false) or die('error');
 		$lc_regs = null;
 		$i = 0;
-		while($row = sybase_fetch_object($result)) { 
+		while($row = odbc_fetch_object($result)) { 
 			$lc_regs ['Anuladas'][$i]= array(
 	 		 "TOTAL_ANULADO"	=> $row -> TOTAL_BRUTO,
 			 "IVA"			=> $row -> IVA,
@@ -1837,14 +1837,14 @@ SUM
 			$i++;
 		}
 		$jsAnulada = (json_encode($lc_regs));
-		sybase_free_result ($result);
+		odbc_free_result ($result);
 
 		// HORAS TRABAJADAS POR CAJEROS
-		$result = sybase_query($queryHorasCajeros, $dbh, false) or die('error');
+		$result = odbc_exec($queryHorasCajeros, $dbh, false) or die('error');
 		$lc_regs = null;
 		$i = 0;
 
-		while($row = sybase_fetch_object($result)) { 
+		while($row = odbc_fetch_object($result)) { 
 			$lc_regs ['HorasCajeros'][$i]= array(
 	 		 "CODIGO"		=> $row -> EMPLOYEE_OBJ_NUM,
 			 "NOMBRE"		=> $row -> EMPLOYEE_CHK_NAME,
@@ -1854,13 +1854,13 @@ SUM
 			$i++;
 		}
       		$jsHoraCajeros = (json_encode($lc_regs));
-		sybase_free_result ($result);
+		odbc_free_result ($result);
 		
 		//VENTA POR MEDIOS
-		$result = sybase_query($queryVtaMedios, $dbh, false) or die('error');
+		$result = odbc_exec($queryVtaMedios, $dbh, false) or die('error');
 		$lc_regs = null;
 		$i = 0;
-		while($row = sybase_fetch_object($result)) { 
+		while($row = odbc_fetch_object($result)) { 
 			$lc_regs ['VtaMedios'][$i]= array(
 	 		  "ORDER_TYPE"	=> $row -> ORDER_TYPE,  
 			  "NET_TTL"		=> $row -> NET_TTL,
@@ -1871,7 +1871,7 @@ SUM
 			$i++;
 		}
 		$jsVtaMedios  = (json_encode($lc_regs));
-		sybase_free_result ($result);		
+		odbc_free_result ($result);		
 
 		/////////////////////////GENERAR INTERFAZ//////////////////////
 		$lc_Cod_Mix_Cab = 0;
@@ -1894,7 +1894,7 @@ SUM
 		$lc_condicion_e[13]	= $jsAnulada;
 		$lc_condicion_e[14]	= $jsHoraCajeros;
 		$lc_condicion_e[16]	= $jsVtaMedios;
-		sybase_close($dbh);
+		odbc_close($dbh);
 		if ($lc_inter->ingresarInformacion('jsonInformacion', $lc_condicion_e)) {
 			$lc_rowdatos 	= $lc_inter->fn_leerobjeto();
                      $mensaje 	= $lc_rowdatos->mensaje;
@@ -1910,7 +1910,7 @@ SUM
 			$codCierre 	= $lc_rowdatos->codCierre;
 		}
 	} else { 
-		sybase_close($dbh);?>
+		odbc_close($dbh);?>
 		<SCRIPT LANGUAGE="JavaScript">
 			alert('Es posible que su tienda se encuentre facturando con un Periodo Anterior. No existe informacion de ventas para el dia seleccionado');
 			window.history.back();

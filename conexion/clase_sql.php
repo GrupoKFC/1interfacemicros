@@ -7,7 +7,7 @@
 ///////FECHA CREACION: 20-04-2009////////////////////////////////////
 ///////FECHA ULTIMA MODIFICACION: 04-05-2009/////////////////////////
 ///////USUARIO QUE MODIFICO: Ximena Celi/////////////////////////////
-///////DECRIPCION ULTIMO CAMBIO: Creación de la función  ////////////
+///////DECRIPCION ULTIMO CAMBIO: Creaciï¿½n de la funciï¿½n  ////////////
 ////fn_numcampo (devuelve el numero de campos de un aconsulta sql) //
 /////////////////////////////////////////////////////////////////////
 include("clase_conexion.php");
@@ -27,10 +27,10 @@ class sql {
 	 //funcion que permite armar la sentencia sql
 	 public function fn_ejecutarquery($lc_query)
 		{  
-			
+			$lc_query = "SET NOCOUNT ON; " . $lc_query;
 			if($lc_conec = $this->lc_conec->fn_conectarse())
 			 {
-			   if($this->lc_datos=mssql_query ($lc_query,$lc_conec))
+			   if($this->lc_datos=sqlsrv_query ($lc_conec,$lc_query))
 				     return $this->lc_datos;
 				else
 				   return false;
@@ -39,27 +39,27 @@ class sql {
 	//funcion  devuelve dataset por objeto
 	public function fn_leerobjeto()
 	{ 
-	   return mssql_fetch_object($this->lc_datos);
+	   return sqlsrv_fetch_object($this->lc_datos);
 	}
     //funcion  devuelve dataset por arreglo
 	public function fn_leerarreglo()
 	{ 
-	   return  mssql_fetch_array($this->lc_datos);
+	   return  sqlsrv_fetch_array($this->lc_datos);
 	}
 	//devolvuelve el numero de registros
     public function fn_numregistro()
 	{
-	  return mssql_num_rows($this->lc_datos);
+	  return sqlsrv_num_rows($this->lc_datos);
 	} 
 		//devuelve el numero de campos de un aconsulta sql
     public function fn_numcampo()
 	{
-	  return mssql_num_fields($this->lc_datos);
+	  return sqlsrv_num_fields($this->lc_datos);
 	} 
 	//liberar consulta y conexion es decir los recursos que esta utilizando
 	public function fn_liberarecurso()
 	{
-	  @mssql_free_result($this->lc_datos);
+	  @sqlsrv_free_result($this->lc_datos);
 	  $this->lc_conec->fn_cerrarconec();
 	}
 	

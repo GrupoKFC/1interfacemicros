@@ -1,7 +1,7 @@
 <?php @session_start();
 //////////////////////////////////////////////////////////////
 ////////DESARROLLADO POR: Ximena Celi/////////////////////////
-////////DESCRIPCION: Clase que permite la conexiÛn con ///////
+////////DESCRIPCION: Clase que permite la conexiÔøΩn con ///////
 ///////////////////  la base de datos                 ////////
 ///////TABLAS INVOLUCRADAS: No hay tablas solo exite  ////////
 ///////////////////        la base de datos en SQLServer2005//
@@ -9,10 +9,10 @@
 ///////FECHA ULTIMA MODIFICACION: 28-04-2009 /////////////////
 ///////USUARIO QUE MODIFICO: Ximena Celi /////////////////////
 ///////DECRIPCION ULTIMO CAMBIO: Renombrar datosd con los ////
-//////////////////////////////// est·ndares dados ////////////
+//////////////////////////////// estÔøΩndares dados ////////////
 //////////////////////////////////////////////////////////////
 
-//Clase para realizar la conexiÛn
+//Clase para realizar la conexiÔøΩn
 class conexion{
                 private $lc_host;
                 private $lc_base;
@@ -26,20 +26,21 @@ class conexion{
 	  $this->lc_base = "SQLGerente_22";
 	  $this->lc_user =  "conexion_gerente";
          $this->lc_clave = "gerente*759"; 
-	  $this->lc_conec = NULL;  
+	  $this->lc_conec = NULL;	  
 	}	
-//FunciÛn que permite conectarse a la base de datos
+//FunciÔøΩn que permite conectarse a la base de datos
 	public function fn_conectarse()
 	{   
-		  if (is_null($this->lc_conec))
-		  {
-		   if (!($this->lc_conec = mssql_connect($this->lc_host, $this->lc_user, $this->lc_clave)
-				  or die ("ERROR!! al intentar conectarse con la base de datos")))
-				  $this->fn_errorconec();	
-			  elseif (!(mssql_select_db($this->lc_base, $this->lc_conec)))
-				 $this->fn_errorconec();	    
-		  }
-		  return $this->lc_conec;	  
+		$serverName = $this->lc_host; //serverName\instanceName
+		$connectionInfo = array( "Database"=> $this->lc_base, "UID"=> $this->lc_user, "PWD"=> $this->lc_clave);
+		$conn = sqlsrv_connect( $serverName, $connectionInfo);
+
+		if( $conn ) {
+		      return $this->lc_conec = $conn;
+		}else{
+		     echo "Conexi√≥n no se pudo establecer.<br />";
+		     die( print_r( sqlsrv_errors(), true));
+		}	  
 	}
 	/*public function fn_conectarse()
 	{ 
@@ -53,15 +54,15 @@ class conexion{
 	  }
 	  return $this->lc_conec;	  
 	}*/
-//Generar un error en caso de que no se pueda realizar la conexiÛn
+//Generar un error en caso de que no se pueda realizar la conexiÔøΩn
 	private function fn_errorconec()
 	{
-	  return mssql_error();
+	  return sqlsrv_errors();
 	}
-//FunciÛn que permite desconectarse a la base de datos
+//FunciÔøΩn que permite desconectarse a la base de datos
 	public function fn_cerrarconec()
 	{
-	  	if(mssql_close($this->lc_conec))
+	  	if(sqlsrv_close($this->lc_conec))
 		 return true;
 		else
 		   return false;

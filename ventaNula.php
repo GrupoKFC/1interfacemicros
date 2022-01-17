@@ -31,14 +31,14 @@ $lc_condicion_e[0] = $codRest;
 $lc_condicion_e[1] = $fecha;
 $mensj = 0;
 
-	/////////////////////////CONEXIÓN A MICROS//////////////////////
+	/////////////////////////CONEXIï¿½N A MICROS//////////////////////
 	
 $server = $lc_Odbc;
 $user   = 'dba';
 $pwd    = 'micros3700';
 $db     = 'micros';
 $lc_regs;
-$dbh=@sybase_connect($server, $user, $pwd) or die('Cannot connect');
+$dbh=odbc_connect($server, $user, $pwd) or die('Cannot connect');
 
 
 	
@@ -55,11 +55,11 @@ $queryAnulacion = "
 	WHERE INVOICESTATUS=0 AND subtotal12 IS NOT NULL AND MICROSBSNZDATE ='$fechaConsulta'";
 
 
-$result = sybase_query($queryAnulacion, $dbh, false) or die('error');
+$result = odbc_exec($queryAnulacion, $dbh, false) or die('error');
 $lc_regs = null;
 $i = 0;
 
-while($row = sybase_fetch_object($result)) { 
+while($row = odbc_fetch_object($result)) { 
 	$lc_regs ['Anuladas'][$i]= array(
 		 "TOTAL_ANULADO"	=> $row -> TOTAL_BRUTO,
 		 "IVA"			=> $row -> IVA,
@@ -69,7 +69,7 @@ while($row = sybase_fetch_object($result)) {
 	$i++;
 }
 $jsAnulada = (json_encode($lc_regs));
-sybase_free_result ($result);
+odbc_free_result ($result);
 
 print_r($jsAnulada);
 		
