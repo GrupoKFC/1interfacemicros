@@ -1645,7 +1645,7 @@ SUM
 
 	/////////////////////////CONSULTAR INFORMACI�N//////////////////////
 	//VENTAS POR PRODUCTO
-	$result = odbc_exec($queryXProducto , $dbh, false) or die('error');
+	$result = odbc_exec( $dbh,$queryXProducto , false) or die('error');
 	$i = 0;
 	while($row = odbc_fetch_object($result)) { 
 		$lc_regs ['XProducto'][$i]= array(
@@ -1673,7 +1673,7 @@ SUM
 	odbc_free_result ($result);
 	if ($jsXProducto != "null"){		
 		//VENTAS POR HORA
-		$result = odbc_exec($queryXHora , $dbh, false) or die('error');
+		$result = odbc_exec($dbh,$queryXHora ,  false) or die('error');
 		$lc_regs = null;
 		$i = 0;
 		while($row = odbc_fetch_object($result)) { 
@@ -1689,7 +1689,7 @@ SUM
 		odbc_free_result ($result);
 
 		//CIERRE DE CAJAS
-		$result = odbc_exec($queryCC, $dbh, false) or die('error');
+		$result = odbc_exec($dbh,$queryCC,  false) or die('error');
 		$lc_regs = null;
 		$i = 0;
 		while($row = odbc_fetch_object($result)) { 
@@ -1715,7 +1715,7 @@ SUM
 		odbc_free_result ($result);
 
 		//VENTA POR CAJERO
-		$result = odbc_exec($queryXCajero, $dbh, false) or die('error');
+		$result = odbc_exec($dbh,$queryXCajero, $dbh, false) or die('error');
 		$lc_regs = null;
 		$i = 0;
 		while($row = odbc_fetch_object($result)) { 
@@ -1731,7 +1731,7 @@ SUM
 		odbc_free_result ($result);
 
 		//VENTAS CREDITOS SC
-		$result = odbc_exec($queryCredSC, $dbh, false) or die('error');
+		$result = odbc_exec($dbh,$queryCredSC,  false) or die('error');
 		$lc_regs = null;
 		$i = 0;
 		while($row = odbc_fetch_object($result)) { 
@@ -1747,7 +1747,7 @@ SUM
 		odbc_free_result ($result);
 
 		//TRANSACCIONES POR CAJERO
-		$result = odbc_exec($queryTransXCajero, $dbh, false) or die('error');
+		$result = odbc_exec($dbh,$queryTransXCajero,  false) or die('error');
 		$lc_regs = null;
 		$i = 0;
 		while($row = odbc_fetch_object($result)) { 
@@ -1761,7 +1761,7 @@ SUM
 		odbc_free_result ($result);
 
 		//TOTALES POR CAJERO
-		$result = odbc_exec($queryTotalXCajero , $dbh, false) or die('error');
+		$result = odbc_exec($dbh,$queryTotalXCajero ,  false) or die('error');
 		$lc_regs = null;
 		$i = 0;
 		while($row = odbc_fetch_object($result)) { 
@@ -1776,7 +1776,7 @@ SUM
 		odbc_free_result ($result);
 
 		//CAJEROS DELIVERY
-		$result = odbc_exec($queryDelivery, $dbh, false) or die('error');
+		$result = odbc_exec($dbh,$queryDelivery,  false) or die('error');
 		$lc_regs = null;
 		$i = 0;
 		while($row = odbc_fetch_object($result)) { 
@@ -1791,7 +1791,7 @@ SUM
 		odbc_free_result ($result);
 
 		//CUPONES - GRUPON
-		$result = odbc_exec($queryCupones, $dbh, false) or die('error');
+		$result = odbc_exec($dbh,$queryCupones,  false) or die('error');
 		$lc_regs = null;
 		$i = 0;
 		while($row = odbc_fetch_object($result)) { 
@@ -1810,7 +1810,7 @@ SUM
 		odbc_free_result ($result);
 		
 		// VENTA Z
-		$result = odbc_exec($queryVentaZ, $dbh, false) or die('error');
+		$result = odbc_exec($dbh,$queryVentaZ,  false) or die('error');
 		$lc_regs = null;
 		$i = 0;
 		while($row = odbc_fetch_object($result)) { 
@@ -1824,7 +1824,7 @@ SUM
 		odbc_free_result ($result);
 		
 		// ANULACIONES
-		$result = odbc_exec($queryAnulacion, $dbh, false) or die('error');
+		$result = odbc_exec($dbh,$queryAnulacion,  false) or die('error');
 		$lc_regs = null;
 		$i = 0;
 		while($row = odbc_fetch_object($result)) { 
@@ -1840,7 +1840,7 @@ SUM
 		odbc_free_result ($result);
 
 		// HORAS TRABAJADAS POR CAJEROS
-		$result = odbc_exec($queryHorasCajeros, $dbh, false) or die('error');
+		$result = odbc_exec($dbh,$queryHorasCajeros,  false) or die('error');
 		$lc_regs = null;
 		$i = 0;
 
@@ -1857,7 +1857,7 @@ SUM
 		odbc_free_result ($result);
 		
 		//VENTA POR MEDIOS
-		$result = odbc_exec($queryVtaMedios, $dbh, false) or die('error');
+		$result = odbc_exec($dbh,$queryVtaMedios,  false) or die('error');
 		$lc_regs = null;
 		$i = 0;
 		while($row = odbc_fetch_object($result)) { 

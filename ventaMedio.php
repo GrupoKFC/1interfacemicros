@@ -283,7 +283,7 @@ SUM
 }
 
 //VENTA POR MEDIOS
-$result = odbc_exec($queryVtaMedios, $dbh, false) or die('error');
+$result = odbc_exec($dbh,$queryVtaMedios, false) or die('error');
 $lc_regs = null;
 $i = 0;
 while($row = odbc_fetch_object($result)) { 

@@ -55,7 +55,7 @@ $queryAnulacion = "
 	WHERE INVOICESTATUS=0 AND subtotal12 IS NOT NULL AND MICROSBSNZDATE ='$fechaConsulta'";
 
 
-$result = odbc_exec($queryAnulacion, $dbh, false) or die('error');
+$result = odbc_exec($dbh,$queryAnulacion,  false) or die('error');
 $lc_regs = null;
 $i = 0;
 
