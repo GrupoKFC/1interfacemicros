@@ -22,10 +22,10 @@ class conexion{
 //Constructor de la clase	
 	public function __construct()
 	{	 
-	  $this->lc_host = "192.168.148.64";
-	  $this->lc_base = "SQLGerente_22";
-	  $this->lc_user =  "conexion_gerente";
-         $this->lc_clave = "gerente*759"; 
+	  $this->lc_host = "192.168.101.29\PRYSIR";//"192.168.148.64";
+	  $this->lc_base = "sql_sir_new";//"SQLGerente_22";
+	  $this->lc_user =  "dev_carlos";//"conexion_gerente";
+         $this->lc_clave = "Dev#3698";//"gerente*759"; 
 	  $this->lc_conec = NULL;	  
 	}	
 //Funci�n que permite conectarse a la base de datos
