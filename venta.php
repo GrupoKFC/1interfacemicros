@@ -55,7 +55,7 @@ if (strlen($mensj) > 1) {?>
     $user = 'dba';
     $pwd = 'micros3700';
     $db = 'micros';
-    $server = "DRIVER={Adaptive Server Enterprise};Server=".$lc_IP.";Database=".$db.";Port=".$port;
+    $server = "DRIVER={CData ODBC Driver for Sybase};Server=".$lc_IP.";Database=".$db.";Port=".$port;
     $dbh = odbc_connect($server, $user, $pwd) or die('Cannot connect');
 
     ///////////////////////// QUERYS //////////////////////
@@ -1703,7 +1703,7 @@ SUM
             $lc_regs['CierreCajas'][] = array(
                 "FECHA" => $row->BUSINESS_DATE,
                 "IVA" => $row->TAX_TTL,
-                "SERVICIO" => $row->SERVICE_TTL,
+                "SERVICIO" => isset($row->SERVICE_TTL),
                 "VENTA_NETA" => $row->NET_TTL,
                 "VENTA_BRUTA" => $row->GROSS_TTL,
                 "TRANSACCIONES" => $row->TRANS_COUNT,
@@ -1722,7 +1722,7 @@ SUM
         odbc_free_result($result);
 
         //VENTA POR CAJERO
-        $result = odbc_exec($dbh, $queryXCajero, $dbh, false) or die('error');
+        $result = odbc_exec($dbh, $queryXCajero, false) or die('error');
         $lc_regs = null;
         $i = 0;
         while ($row = odbc_fetch_object($result)) {
